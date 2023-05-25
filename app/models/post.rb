@@ -3,8 +3,8 @@ class Post < ApplicationRecord
   has_many :comments, foreign_key: :author_id
   has_many :likes, foreign_key: :author_id
 
-  def recent_posts
-    posts.order(created_at: :desc).limit(5)
+  def recent_comments
+    comments.order(created_at: :desc).limit(5)
   end
 
   private
