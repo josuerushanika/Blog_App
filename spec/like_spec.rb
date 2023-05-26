@@ -12,21 +12,19 @@ RSpec.describe Like, type: :model do
     expect(like.post_id).to_not eql(-5)
     expect(like.post_id).to eql(1)
   end
-   
+
   it 'increases likes_counter for the associated post' do
     User.new(name: 'Mert', photo: 'www.unsplash.com', bio: 'Lorem ipsum', posts_counter: 5)
-  
-    post = Post.new(author_id: 1, title: 'first post', text: 'this is the first post', comments_counter: 3, likes_counter: 2)
+
+    post = Post.new(author_id: 1, title: 'first post', text: 'this is the first post', comments_counter: 3,
+                    likes_counter: 2)
     post.save
-  
+
     like = Like.new(author_id: 1, post: post)
     like.save
-  
+
     like.increase_like_counter
-  
+
     expect(post.likes_counter).to eq(3)
   end
-  
- 
 end
-
