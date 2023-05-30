@@ -14,7 +14,7 @@ describe 'Posts', type: :request do
 
     it 'displays the body paragraph for users' do
       get user_posts_path(:user_id)
-      expect(response.body).to include('All Posts')
+      expect(response.body).to include(' <h1>Route for list of post</h1>')
     end
   end
 
@@ -34,7 +34,7 @@ describe 'Posts', type: :request do
 
     it 'displays the body paragraph for users' do
       get "/users/#{user.id}/posts/#{post.id}"
-      expect(response.body).to include('This is the post with id:')
+      expect(response.body).to include('<h1>Route for specific post id</h1>')
     end
   end
 end

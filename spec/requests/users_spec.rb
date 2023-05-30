@@ -15,7 +15,7 @@ describe 'Users', type: :request do
 
     it 'displays the body paragraph for users' do
       get '/users'
-      expect(response.body).to include('All Users')
+      expect(response.body).to include(' <h1>Router for all users </h1>')
     end
   end
 
@@ -34,7 +34,7 @@ describe 'Users', type: :request do
 
     it 'displays the body paragraph for specific user' do
       get "/users/#{user.id}"
-      expect(response.body).to include('The page of the user with id:')
+      expect(response.body).to include('<h1> Routes for a specific user with id</h1>')
     end
   end
 end
