@@ -19,7 +19,7 @@ describe 'Posts', type: :request do
   end
 
   describe 'GET specific post for the user' do
-    user = User.create!(name: 'Mert', photo: 'www.unsplash.com', bio: 'Test', posts_counter: 3)
+    user = User.create!(name: 'Josue', photo: 'www.unsplash.com', bio: 'Test', posts_counter: 3)
     post = Post.create!(title: 'Test Post', author_id: user.id, comments_counter: 3, likes_counter: 5)
 
     it 'checks whether it brings successful response' do

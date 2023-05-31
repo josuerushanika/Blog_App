@@ -14,7 +14,7 @@ RSpec.describe Like, type: :model do
   end
 
   it 'increases likes_counter for the associated post' do
-    User.new(name: 'Mert', photo: 'www.unsplash.com', bio: 'Lorem ipsum', posts_counter: 5)
+    User.new(name: 'Josue', photo: 'www.unsplash.com', bio: 'Lorem ipsum', posts_counter: 5)
 
     post = Post.new(author_id: 1, title: 'first post', text: 'this is the first post', comments_counter: 3,
                     likes_counter: 2)

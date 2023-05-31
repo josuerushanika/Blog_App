@@ -20,7 +20,7 @@ describe 'Users', type: :request do
   end
 
   describe 'GET specific user' do
-    user = User.create!(name: 'Mert', photo: 'www.unsplash.com', bio: 'Test', posts_counter: 3)
+    user = User.create!(name: 'Josue', photo: 'www.unsplash.com', bio: 'Test', posts_counter: 3)
 
     it 'checks whether it brings a successful response' do
       get "/users/#{user.id}"

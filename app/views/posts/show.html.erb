@@ -7,7 +7,14 @@
        <h3>Post <%= @Post.id%> by <%= @post.author.name%></h3>
        <p class='counter'>Comments: <%= @post.comments_counter%>, Likes: <%= @post.likes_counter%></p>
        <p><%= @post.text%></p>
-       
+
+       <% @post.comments.each do |comment|%>
+       <div class='comments'>
+        <p><%= comment.author.name%>
+        <p><%= comment.text%>
+       </div>
+       <% end %>
       <div>
+      <% end %>
   </section>
 </div>
