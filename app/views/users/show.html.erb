@@ -1,1 +1,26 @@
-<h1> Routes for a specific user with id</h1>
+<div class='user-details'>
+ <section class='user-header'>
+   <div class='user-photo'>
+     <img src=<% @user.photo%> class='user-image'>
+   </div>
+
+   <div class='user-info'>
+    <h2><%= @user.name%></h2>
+    <p>Number of posts: <%= @user.posts_counter%></p>
+   </div>
+ </section>
+
+ <section class='user-card'>
+   <div class='bio'>
+     <h3>Bio</h3>
+     <p><%= @user.bio%></p>
+   </div>
+
+   <% if @user.last_posts.blank?%>
+     <h2>There are no posts.Please add a post.</h2>
+     <% else %>
+       <% else %>
+         <% @user.last_posts.each do |post|%>
+         
+ </section>
+</div>
