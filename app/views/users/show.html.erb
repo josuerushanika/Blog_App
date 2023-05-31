@@ -21,6 +21,12 @@
      <% else %>
        <% else %>
          <% @user.last_posts.each do |post|%>
-         
+         <div class='post-container'>
+           <h3>Post: <%= link_to post.id, user_post_path(@user, post) %></h3>
+           <p><%= post.text%></p>
+           <p class='counter'>Comments: <%= post.comments_counter%>, Likes:<%= post.likes_counter %></p>
+         </div>
+         <% end %>
  </section>
+ <a class='all-posts-btn' href='<%= user_post_path(user_id: @user.id)%>'>See all posts</a>
 </div>
