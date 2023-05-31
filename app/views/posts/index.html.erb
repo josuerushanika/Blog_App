@@ -1,1 +1,32 @@
-<h1>Route for list of post</h1>
+<div class= 'single-post-container'>
+  <section class='user-header'>
+    <div class='user-photo'>
+      <img src= <% @user.photo%> class='user-image'>
+    <div>
+    <div class='user-info'>
+     <h2><%=@user.name%></h2>
+     <p>Number of posts: <%= @user.posts_counter%></p>
+    </div>
+  </section>
+
+  <section>
+    <% if @user.last_posts.blank?%>
+     <h2>There are no posts.Please add a post</h2>
+    <%else%>
+       <% @user.posts.each do |post| %>
+       <div class='single-post'>
+           <h3>Post: <%= link_to post.id, user_post_path(@user,post)%></h3>
+           <p><%= post.text%></p>
+           <p class='counter'>Comments: <%= post.comments_counter%>, Likes: <%= post.likes_counter%></p>
+
+           <% post.last_comments.each do |comment|%>
+           <div class='comments'>
+             <p><%= comment.author.name%>
+             <p><%= comment.text %>
+           </div>
+           <% end %>
+        <div>
+        <% end %>
+  </section>
+  <a class='pagination-btn' href='#'>Pagination</a>
+</div>

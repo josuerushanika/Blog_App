@@ -4,7 +4,7 @@
       <img scr="<%= user.photo%>" class='user-image'>
     </div>
     <h2 class='users-info'>
-      <%= link_to user.name, user_path(user)%>
+      <%= link_to user.name, user_path(user.id)%>
     </h2>
     <p class='post-num'>Number of posts: <%= user.posts_counter%></p>
   <div>
