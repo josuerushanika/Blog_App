@@ -1,1 +1,20 @@
-<h1>Route for specific post id</h1>
+<div>
+  <section>
+    <% if @user.last_posts.blank? %>
+      <h2>There are no posts. Please add a post.</h2>
+      <%else%>
+      <div class='final-post'>
+       <h3>Post <%= @post.title%> by <%= @post.author.name%></h3>
+       <p class='counter'>Comments: <%= @post.comments_counter%>, Likes: <%= @post.likes_counter%></p>
+       <p><%= @post.text%></p>
+
+       <% @post.comments.each do |comment|%>
+       <div class='comments'>
+        <p><%= comment.author.name%>
+        <p><%= comment.text%>
+       </div>
+       <% end %>
+      <div>
+      <% end %>
+  </section>
+</div>

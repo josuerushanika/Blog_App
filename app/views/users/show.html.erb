@@ -1,1 +1,32 @@
-<h1> Routes for a specific user with id</h1>
+<div class='user-details'>
+  <section class='user-header'>
+    <div class='user-photo'>
+      <img src="<%= @user.photo %>" class='user-image'>
+    </div>
+    <div class='user-info'>
+      <h2><%= @user.name %></h2>
+      <p>Number of posts: <%= @user.posts_counter %></p>
+    </div>
+  </section>
+
+  <section class='user-card'>
+    <div class='bio'>
+      <h3>Bio</h3>
+      <p><%= @user.bio %></p>
+    </div>
+
+    <% if @user.last_posts.blank? %>
+      <h2>There are no posts. Please add a post.</h2>
+    <% else %>
+      <% @user.last_posts.each do |post| %>
+        <div class='post-container'>
+          <h3>Post: <%= link_to post.id, user_post_path(@user, post) %></h3>
+          <p><%= post.text %></p>
+          <p class='counter'>Comments: <%= post.comments_counter %>, Likes: <%= post.likes_counter %></p>
+        </div>
+      <% end %>
+    <% end %>
+  </section>
+
+  <a class='all-posts-btn' href='<%= user_posts_path(params[:id]) %>'>See all posts</a>
+</div>

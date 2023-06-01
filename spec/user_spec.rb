@@ -25,7 +25,7 @@ RSpec.describe User, type: :model do
   end
 
   it 'brings last three posts for the user' do
-    user = User.new(name: 'Mert', posts_counter: 0)
+    user = User.new(name: 'Josue', posts_counter: 0)
     user.save!
 
     user.posts.create!(title: 'Post 1', text: 'First post', likes_counter: 5, comments_counter: 2)
