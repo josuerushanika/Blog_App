@@ -4,7 +4,7 @@
       <h2>There are no posts. Please add a post.</h2>
       <%else%>
       <div class='final-post'>
-       <h3>Post <%= @Post.id%> by <%= @post.author.name%></h3>
+       <h3>Post <%= @post.title%> by <%= @post.author.name%></h3>
        <p class='counter'>Comments: <%= @post.comments_counter%>, Likes: <%= @post.likes_counter%></p>
        <p><%= @post.text%></p>
 
