@@ -8,6 +8,17 @@
        <p class='counter'>Comments: <%= @post.comments_counter%>, Likes: <%= @post.likes_counter%></p>
        <p><%= @post.text%></p>
 
+         <section class='buttons'>
+          <button class='create-comment-btn'>
+            <%= link_to 'Add Comment', new_user_post_comment_path(@user, @post)%>
+          </button>
+          <button>
+            <%= form_with model: Like, url: user_post_likes_path(@post.author, @post) do |form| %>
+              <%= form.submit 'Like Post', class: 'like-btn' %>
+            <% end %>
+          </button>
+      </section>
+
        <% @post.comments.each do |comment|%>
        <div class='comments'>
         <p><%= comment.author.name%>

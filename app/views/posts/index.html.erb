@@ -9,6 +9,10 @@
     </div>
   </section>
 
+  <button class='create-post-btn'>
+    <%= link_to 'Create New Post', new_user_post_path(@user)%>
+  </button>
+
   <section>
     <% if @user.last_posts.blank? %>
       <h2>There are no posts. Please add a post</h2>
