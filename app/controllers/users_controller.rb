@@ -16,7 +16,7 @@ class UsersController < ApplicationController
     if @post.save
       redirect_to "/users/#{current_user.id}/posts", notice: 'Post created Successfully'
     else
-      render :new, notice: 'Post not created'  
+      render :new, notice: 'Post not created'
     end
   end
 
