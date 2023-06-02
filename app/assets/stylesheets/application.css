@@ -41,3 +41,8 @@ a {
     margin-bottom: 2rem;
     border: 1px solid black;
 }
+
+.user-container, .user-header{
+    display: flex;
+    padding: 20px;
+}
