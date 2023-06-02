@@ -5,8 +5,9 @@ class CommentsController < ActionController::Base
   end
 
   def create
-    @comment = current_user.comments.new(comment_params)
-    @comment.post_id = params[:post_id]
+    @post = Post.find(params[:post_id])
+    @comment = @post.comments.new(comment_params)
+    @comment.author = @current_user
 
     if @comment.save
       redirect_to user_posts_path

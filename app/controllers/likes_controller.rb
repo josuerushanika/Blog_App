@@ -1,13 +1,14 @@
-class LikesController < ActionController::Base
+class LikesController < ApplicationController
   def create
-    @like = current_user.likes.new
-    @like.post_id = params[:post_id]
+    @user = User.find(params[:user_id])
+    @post = Post.find(params[:post_id])
+    @like = @post.likes.build(author_id: current_user.id) # Assuming `author_id` is an attribute of `Like` model
 
     if @like.save
-      flash[:sucess] = 'Liked'
-      redirect_to user_posts_path
+      flash[:success] = 'Liked'
     else
-      render :create
+      flash[:error] = 'Failed to like'
     end
+    redirect_to user_posts_path(@user)
   end
 end
