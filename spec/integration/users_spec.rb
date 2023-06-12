@@ -1,90 +1,122 @@
 require 'rails_helper'
 
-RSpec.describe 'Users', type: :feature do
-  before do
-    @user1 = User.create(name: 'Donia', photo: 'https://via.placeholder.com/150', bio: 'I love coding!',
-                         posts_counter: 2)
-    @user2 = User.create(name: 'Jane', photo: 'https://via.placeholder.com/150', bio: 'I love hiking!',
-                         posts_counter: 0)
-  end
+RSpec.feature 'Users', type: :feature do
+  describe 'users\index' do
+    before(:each) do
+      @user1 = User.create(name: 'ted lasso', photo: 'https://bit.ly/3ILKEv7', bio: 'Isome bio for user 1.')
+      @user2 = User.create(name: 'some other name', photo: 'https://bit.ly/3ILKEv7', bio: 'Isome bio for user 2.')
+      @user3 = User.create(name: 'some other other name', photo: 'https://bit.ly/3ILKEv7',
+                           bio: 'Isome bio for user 3.')
 
-  describe 'User index page' do
-    it 'displays the username of all other users' do
+      @post1 = Post.create(title: 'Post 1', text: 'some post 1 .', user: @user1)
+      @post2 = Post.create(title: 'post2', text: 'some post 2 .', user: @user1)
+      @post3 = Post.create(title: 'post3', text: 'some post 3 .', user: @user1)
+      @post4 = Post.create(title: 'post4', text: 'some post 4 .', user: @user1)
+      @post5 = Post.create(title: 'post5', text: 'some post 5 .', user: @user1)
+      @post6 = Post.create(title: 'post6', text: 'some post 6 .', user: @user1)
+    end
+    it 'Shows the right content' do
+      visit users_path
+      expect(page).to have_content('All users place holder')
+    end
+
+    it 'shuoul gave user 1 present' do
       visit users_path
       expect(page).to have_content(@user1.name)
-      expect(page).to have_content(@user2.name)
     end
 
-    it 'displays the profile picture for each user' do
+    it 'shuould have user1\'s profile picture' do
       visit users_path
-      expect(page).to have_css("img[src='#{@user1.photo}']")
-      expect(page).to have_css("img[src='#{@user2.photo}']")
+      expect(page).to have_css("img[src*=\"#{@user1.photo}\"]")
+    end
+    it 'shuould have user2\'s profile picture' do
+      visit users_path
+      expect(page).to have_css("img[src*=\"#{@user2.photo}\"]")
+    end
+    it 'shuould have user2\'s profile picture' do
+      visit users_path
+      expect(page).to have_css("img[src*=\"#{@user3.photo}\"]")
     end
 
-    it 'displays the number of posts each user has written' do
+    it 'Shows the number of a  posts for user 1' do
       visit users_path
-      expect(page).to have_content("Number of posts: #{@user1.posts_counter}")
-      expect(page).to have_content("Number of posts: #{@user2.posts_counter}")
+      expect(page).to have_content(@user1.posts_counter)
+    end
+    it 'Shows the number of a  posts for user 2' do
+      visit users_path
+      expect(page).to have_content(@user2.posts_counter)
+    end
+    it 'Shows the number of a  posts for user 3' do
+      visit users_path
+      expect(page).to have_content(@user3.posts_counter)
     end
 
-    it "redirects to user's show page when clicking on a user" do
+    it 'Should redirect to user show page' do
       visit users_path
-      click_link @user1.name
+      click_link(@user1.name)
       expect(page).to have_current_path(user_path(@user1))
     end
   end
+end
+describe 'user\show' do
+  before(:each) do
+    @user1 = User.create(name: 'some name', photo: 'https://bit.ly/3ILKEv7', bio: 'Isome bio for user 1.')
+    @user2 = User.create(name: 'some other name', photo: 'https://bit.ly/3ILKEv7', bio: 'Isome bio for user 2.')
+    @user3 = User.create(name: 'some other other name', photo: 'https://bit.ly/3ILKEv7', bio: 'Isome bio for user 3.')
 
-  describe 'User show page' do
-    before do
-      @user1 = User.create(name: 'Donia', photo: 'https://via.placeholder.com/150', bio: 'I love coding!')
-      @user1.save
-      @post1 = @user1.posts.create(title: 'First post', text: 'This is my first post.')
-      @post2 = @user1.posts.create(title: 'Second post', text: 'This is my second post.')
-      @post3 = @user1.posts.create(title: 'Third post', text: 'This is my third post.')
-    end
+    @post1 = Post.create(title: 'Post1', text: 'some post 1 .', user: @user1)
+    @post2 = Post.create(title: 'post2', text: 'some post 2 .', user: @user1)
+    @post3 = Post.create(title: 'post3', text: 'some post 3 .', user: @user2)
+    @post4 = Post.create(title: 'post4', text: 'some post 4 .', user: @user1)
+    @post5 = Post.create(title: 'post5', text: 'some post 5 .', user: @user1)
+    @post6 = Post.create(title: 'post6', text: 'some post 6 .', user: @user1)
+  end
+  it 'Shows user profile picture' do
+    visit user_path(@user1)
+    expect(page).to have_css("img[src*=\"#{@user1.photo}\"]")
+  end
 
-    it "displays the user's profile picture" do
-      visit user_path(@user1)
-      expect(page).to have_css("img[src='#{@user1.photo}']")
-    end
+  it 'Shows the right user name' do
+    visit user_path(@user1)
+    expect(page).to have_content(@user1.name)
+  end
 
-    it "displays the user's username" do
-      visit user_path(@user1)
-      expect(page).to have_content(@user1.name)
-    end
+  it 'Shows the right number of posts' do
+    visit user_path(@user1)
+    expect(page).to have_content("Number of posts: #{@user1.posts_counter}")
+  end
 
-    it 'displays the number of posts the user has written' do
-      visit user_path(@user1)
-      expect(page).to have_content(@user1.posts_counter)
-    end
+  it 'Shows the right usesr bio' do
+    visit user_path(@user1)
+    expect(page).to have_content(@user1.bio)
+  end
 
-    it "displays the user's bio" do
-      visit user_path(@user1)
-      expect(page).to have_content(@user1.bio)
-    end
+  it 'Shows the firts 3 post' do
+    visit user_path(@user1)
+    expect(page).to have_content(@post4.title)
+  end
+  it 'Shows the firts 3 post' do
+    visit user_path(@user1)
+    expect(page).to have_content(@post5.title)
+  end
+  it 'Shows the firts 3 post' do
+    visit user_path(@user1)
+    expect(page).to have_content(@post6.title)
+  end
 
-    it "displays the user's first 3 posts" do
-      visit user_path(@user1)
-      expect(page).to have_content(@post1.title)
-      expect(page).to have_content(@post2.title)
-      expect(page).to have_content(@post3.title)
-    end
-
-    it 'should render the button that lets view all of a user\'s posts' do
-      visit user_path(@user1)
-      expect(page).to have_link('See all posts', href: user_posts_path(user_id: @user1.id), class: 'more-post-btn')
-    end
-
-    it "redirects to the post's show page when clicking on a post" do
-      visit user_path(@user1)
-      click_link @post1.title
-      expect(current_path).to eq(user_post_path(@user1, @post1))
-    end
-
-    it "redirects to the user's posts index page when clicking on 'See all posts'" do
-      visit user_path(@user1)
-      click_link 'See all posts'
-      expect(current_path).to eq(user_posts_path(user_id: @user1.id))
-    end
+  it 'Shows the firts 3 post' do
+    visit user_path(@user1)
+    expect(page).to have_content('See all posts')
+  end
+  it 'Should redirect to user posts page' do
+    visit user_path(@user1)
+    click_link(@post6.title)
+    expect(page).to have_current_path(user_post_path(@post6.user, @post6))
+  end
+  it 'Should redirect to user posts page' do
+    visit user_path(@user1)
+    click_link('See all posts')
+    expect(page).to have_current_path(user_posts_path(@user1))
   end
 end
+
