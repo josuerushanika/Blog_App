@@ -18,7 +18,7 @@ RSpec.feature 'Posts', type: :feature do
       @comment2 = Comment.create(text: 'ssecond comment', author: @user3, post: @post2)
       @comment3 = Comment.create(text: 'third comment', author: @user3, post: @post2)
       @comment4 = Comment.create(text: 'fourth comment', author: @user2, post: @post1)
-      @comment5 = Comment.create(text: 'fifth comment',author: @user3, post: @post2)
+      @comment5 = Comment.create(text: 'fifth comment', author: @user3, post: @post2)
     end
 
     it 'shuould have user1\'s profile picture' do

@@ -67,7 +67,6 @@ describe 'user\show' do
     @post5 = Post.create(title: 'post5', text: 'some post 5 .', author: @user1)
     @post6 = Post.create(title: 'post6', text: 'some post 6 .', author: @user1)
   end
- 
 
   describe 'user\show' do
     before do
@@ -77,17 +76,15 @@ describe 'user\show' do
       @post2 = Post.create(user: @user1, title: 'Post 2', text: 'This is post 2')
       @post3 = Post.create(user: @user2, title: 'Post 3', text: 'This is post 3')
     end
-  
+
     it 'Shows the right number of posts' do
       visit user_path(@user1)
-      expect(page).to have_content("Number of posts: 2")
+      expect(page).to have_content('Number of posts: 2')
     end
   end
-  
+
   it 'Should redirect to user posts page' do
-    visit user_path(@user1)
     click_link('See all posts')
     expect(page).to have_current_path(user_posts_path(@user1))
   end
 end
-

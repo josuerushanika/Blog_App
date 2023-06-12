@@ -137,3 +137,6 @@ I would like to thank for Microverse to provide us learning materials, and my pe
 This project is contributed under [MIT](./LICENSE) licensed.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+<!-- rails routes --expanded       to show router history -->
