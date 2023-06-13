@@ -140,3 +140,12 @@ This project is contributed under [MIT](./LICENSE) licensed.
 
 
 <!-- rails routes --expanded       to show router history -->
+
+<!-- Device Registration New
+  
+     <div class="field">
+      <%= f.label :name %>
+      <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+    </div>
+
+ -->
