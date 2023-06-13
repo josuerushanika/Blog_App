@@ -9,3 +9,4 @@
     <p class='post-num'>Number of posts: <%= user.posts_counter%></p>
   <div>
 <% end %>
+<%= button_to 'Sign out', destroy_user_session_path, method: :delete, class: "sign-out"%>
