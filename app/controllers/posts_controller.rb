@@ -14,7 +14,7 @@ class PostsController < ApplicationController
       redirect_to new_user_session_path
     else
       @post = current_user.posts.new(post_params)
-    
+
       if @post.save
         redirect_to user_posts_path(current_user), notice: 'Post created successfully.'
       else
@@ -23,20 +23,18 @@ class PostsController < ApplicationController
       end
     end
   end
-  
 
   def show
     @post = Post.find(params[:id])
     @user = User.find(params[:user_id])
   end
-  
-   def destroy   
-     @post = current_user.posts.find(params[:id])    
-     @post.destroy    
-     flash[:notice] = "Post deleted successfully ." 
-     redirect_to user_posts_path(current_user)
-   end
 
+  def destroy
+    @post = current_user.posts.find(params[:id])
+    @post.destroy
+    flash[:notice] = 'Post deleted successfully .'
+    redirect_to user_posts_path(current_user)
+  end
 
   private
 

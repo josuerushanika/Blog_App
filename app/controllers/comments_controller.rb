@@ -15,13 +15,12 @@ class CommentsController < ActionController::Base
       render :new
     end
   end
-  
+
   def destroy
     @comment = Comment.find(params[:id])
     @comment.destroy
     redirect_to request.referrer
   end
-
 
   private
 
