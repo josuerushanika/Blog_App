@@ -27,5 +27,9 @@
        <% end %>
       <div>
       <% end %>
+
+    <%if can? :destroy, @post%>
+     <%= link_to 'Remove', user_post_path(@post.author, @post), method: :delete, data: { turbo_method: :delete }%>
+    <%end%> 
   </section>
 </div>
