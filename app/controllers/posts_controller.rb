@@ -9,14 +9,21 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = current_user.posts.new(post_params)
-    if @post.save
-      redirect_to "/users/#{current_user.id}/posts", notice: 'Post created Successfully'
+    if current_user.nil?
+      flash[:alert] = 'You need to be logged in to create a post.'
+      redirect_to new_user_session_path
     else
-      flash[:alert] = 'Something went wrong'
-      render :new
+      @post = current_user.posts.new(post_params)
+    
+      if @post.save
+        redirect_to user_posts_path(current_user), notice: 'Post created successfully.'
+      else
+        flash.now[:alert] = 'Something went wrong.'
+        render :new
+      end
     end
   end
+  
 
   def show
     @post = Post.find(params[:id])
@@ -29,6 +36,7 @@ class PostsController < ApplicationController
      flash[:notice] = "Post deleted successfully ." 
      redirect_to user_posts_path(current_user)
    end
+
 
   private
 
