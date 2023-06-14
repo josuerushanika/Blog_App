@@ -9,10 +9,6 @@ class PostsController < ApplicationController
   end
 
   def create
-    if current_user.nil?
-      flash[:alert] = 'You need to be logged in to create a post.'
-      redirect_to new_user_session_path
-    else
       @post = current_user.posts.new(post_params)
 
       if @post.save
@@ -21,7 +17,6 @@ class PostsController < ApplicationController
         flash.now[:alert] = 'Something went wrong.'
         render :new
       end
-    end
   end
 
   def show
