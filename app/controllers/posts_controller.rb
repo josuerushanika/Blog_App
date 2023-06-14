@@ -9,14 +9,14 @@ class PostsController < ApplicationController
   end
 
   def create
-      @post = current_user.posts.new(post_params)
+    @post = current_user.posts.new(post_params)
 
-      if @post.save
-        redirect_to user_posts_path(current_user), notice: 'Post created successfully.'
-      else
-        flash.now[:alert] = 'Something went wrong.'
-        render :new
-      end
+    if @post.save
+      redirect_to user_posts_path(current_user), notice: 'Post created successfully.'
+    else
+      flash.now[:alert] = 'Something went wrong.'
+      render :new
+    end
   end
 
   def show
