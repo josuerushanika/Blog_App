@@ -1,14 +1,13 @@
 class CommentsController < ActionController::Base
-   def index
+  def index
     @user = User.find(params[:id])
     @posts = Post.find(params[:id])
     @comments = Comment.find(params[:comment_id])
 
     respond_to do |format|
-       format.htmlformat.json { render json: @comment}
+      format.htmlformat.json { render json: @comment }
     end
-   end
-
+  end
 
   def new
     @comment = Comment.new
@@ -22,15 +21,16 @@ class CommentsController < ActionController::Base
 
     if @comment.save
       respond_to do |format|
-        format.html { redirect_to "/users/#{current_user.id}/posts/#{params[:post_id]}", notice: 'Comment created successfully' }
-        format.json { render json: @comment, status: :created}
+        format.html do
+          redirect_to "/users/#{current_user.id}/posts/#{params[:post_id]}", notice: 'Comment created successfully'
+        end
+        format.json { render json: @comment, status: :created }
       end
-
 
     else
       respond_to do |format|
-        format.html { render :new}
-        format.json { render json: @comment.errors, status: :unprocessable_entry}
+        format.html { render :new }
+        format.json { render json: @comment.errors, status: :unprocessable_entry }
       end
     end
   end

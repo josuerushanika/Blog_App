@@ -5,7 +5,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json { render json: @posts}
+      format.json { render json: @posts }
     end
   end
 
