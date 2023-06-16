@@ -73,6 +73,9 @@ group :test do
   gem 'webdrivers'
 end
 
+gem 'rswag'
 gem 'cancancan'
 gem 'devise', '~> 4.9'
 gem 'rack-cors'
+
+
